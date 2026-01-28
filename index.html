@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="MindSpark - Improve logical thinking, reasoning, and decision-making through fun analytical puzzles. Train how to think, not memorization.">
+  <meta name="keywords" content="thinking games, logic puzzles, analytical thinking, reasoning, brain training">
+  <meta name="author" content="MindSpark">
+  <title>MindSpark - Analytical Thinking Game</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div class="app-container">
+
+    <!-- ============================================
+         HOME SCREEN
+         ============================================ -->
+    <div id="home-screen" class="screen active">
+      <div class="screen-content">
+        <div class="logo">
+          <h1>MindSpark</h1>
+          <p>Train your thinking, not your memory</p>
+        </div>
+
+        <div class="card card-glass">
+          <!-- Streak Display -->
+          <div id="streak-display" class="streak-display">
+            <span class="flame-icon">🔥</span>
+            <span id="streak-number">0</span>
+            <span style="font-size: 1rem; color: var(--color-text-muted);">day streak</span>
+          </div>
+
+          <!-- Streak Freezes -->
+          <div id="freeze-display" class="freeze-display hidden">
+            <div class="freeze-label">Streak Protection</div>
+            <div class="freeze-icons" id="freeze-icons">
+              <!-- Icons injected via JS -->
+            </div>
+            <div class="freeze-count" id="freeze-text">0/3 available</div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span id="total-puzzles" class="stat-value">0</span>
+              <span class="stat-label">Puzzles</span>
+            </div>
+            <div class="stat-card">
+              <span id="accuracy-stat" class="stat-value">0%</span>
+              <span class="stat-label">Accuracy</span>
+            </div>
+          </div>
+
+          <!-- Ad Cooldown Progress (v2.0) -->
+          <div id="ad-cooldown-container" class="ad-cooldown-container hidden">
+            <div class="ad-cooldown-header">
+              <span class="ad-cooldown-label">📺 Next Ad Available</span>
+              <span class="ad-cooldown-status" id="ad-cooldown-status">Solve 5 puzzles</span>
+            </div>
+            <div class="ad-cooldown-progress-bar">
+              <div class="ad-cooldown-progress-fill" id="ad-cooldown-progress"></div>
+            </div>
+            <div class="ad-cooldown-info">
+              <span id="ad-count-today">0/6 ads today</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="home-actions">
+            <button id="start-playing-btn" class="btn btn-primary btn-large btn-block">
+              Start Playing
+            </button>
+            <button id="daily-challenge-btn" class="btn btn-accent btn-large btn-block">
+              Daily Challenge ⭐
+            </button>
+            <button id="view-progress-btn" class="btn btn-secondary btn-block">
+              View Progress
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         MODE SELECTION SCREEN
+         ============================================ -->
+    <div id="mode-screen" class="screen">
+      <div class="screen-content">
+        <h2 class="text-center mb-lg">Choose Your Mode</h2>
+
+        <div class="options-grid">
+          <div class="option-card" data-mode="timed">
+            <h3>⏱️ Timed Mode</h3>
+            <p>Race against the clock. Soft timer adds excitement without pressure.</p>
+          </div>
+
+          <div class="option-card" data-mode="relaxed">
+            <h3>🧘 Relaxed Mode</h3>
+            <p>Take your time. Think deeply without any time constraints.</p>
+          </div>
+        </div>
+
+        <button id="mode-back-btn" class="btn btn-secondary btn-block mt-lg">
+          ← Back
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================
+         DIFFICULTY SELECTION SCREEN
+         ============================================ -->
+    <div id="difficulty-screen" class="screen">
+      <div class="screen-content">
+        <h2 class="text-center mb-lg">Choose Difficulty</h2>
+
+        <div class="options-grid">
+          <div class="option-card" data-difficulty="beginner">
+            <h3>🌱 Beginner</h3>
+            <p>Clear logic, no ambiguity. Perfect for getting started.</p>
+          </div>
+
+          <div class="option-card" data-difficulty="intermediate">
+            <h3>🌿 Intermediate</h3>
+            <p>Basic reasoning with 1-2 thinking steps. Moderate challenge.</p>
+          </div>
+
+          <div class="option-card" data-difficulty="expert">
+            <h3>🌳 Expert</h3>
+            <p>Best-choice logic and trade-offs. For experienced thinkers.</p>
+          </div>
+        </div>
+
+        <button id="difficulty-back-btn" class="btn btn-secondary btn-block mt-lg">
+          ← Back
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================
+         GAMEPLAY SCREEN
+         ============================================ -->
+    <div id="gameplay-screen" class="screen">
+      <div class="screen-content">
+        <!-- Puzzle Header -->
+        <div class="puzzle-header">
+          <button id="exit-game-btn" class="btn-text" aria-label="Exit Game">✕ Exit</button>
+          <div>
+            <span id="puzzle-type-badge" class="badge badge-primary">Pattern</span>
+            <span id="puzzle-difficulty-badge" class="badge badge-primary">Kid</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: var(--space-sm);">
+            <!-- Streak Points Indicator -->
+            <div class="streak-points-indicator" id="streak-points-display">
+              <span class="points-icon">🔥</span>
+              <span class="points-value" id="points-value">0</span>
+            </div>
+            <!-- Timer -->
+            <div id="timer-container" class="hidden">
+              <div class="timer" id="timer-display">
+                <span>⏱️</span>
+                <span id="timer-value">60</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Puzzle Question -->
+        <div class="puzzle-question">
+          <h2 id="puzzle-question-text">Question will appear here</h2>
+          <div class="puzzle-content">
+            <p id="puzzle-content-text">Puzzle content will appear here</p>
+          </div>
+        </div>
+
+        <!-- Hint Button -->
+        <div style="text-align: center; margin: var(--space-md) 0;">
+          <button id="hint-button" class="hint-button">
+            💡 Get Hint
+            <span class="hint-cost">
+              <span>🔥</span>
+              <span id="hint-cost-display">3</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- Hint Display (hidden by default) -->
+        <div id="hint-display-container" class="hidden">
+          <!-- Hints will be dynamically inserted here -->
+        </div>
+
+        <!-- Answer Options -->
+        <div class="options-grid" id="answer-options">
+          <!-- Options will be dynamically inserted -->
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submit-answer-btn" class="btn btn-primary btn-large btn-block mt-lg" disabled>
+          Submit Answer
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================
+         RESULT SCREEN
+         ============================================ -->
+    <div id="result-screen" class="screen">
+      <div class="screen-content">
+        <!-- Result Icon -->
+        <div id="result-icon" class="result-icon">
+          ✅
+        </div>
+
+        <!-- Result Message -->
+        <div class="result-message">
+          <h2 id="result-title">Correct!</h2>
+          <p id="result-message-text">Excellent reasoning!</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span id="result-time" class="stat-value">30s</span>
+            <span class="stat-label">Time Taken</span>
+          </div>
+          <div class="stat-card">
+            <span id="result-streak" class="stat-value">5</span>
+            <span class="stat-label">Streak</span>
+          </div>
+        </div>
+
+        <!-- Explanation -->
+        <div class="explanation-box">
+          <h3>💡 Explanation</h3>
+          <p id="explanation-text">The explanation will appear here.</p>
+        </div>
+
+        <!-- Share Button -->
+        <div style="text-align: center;">
+          <button class="share-button" id="share-achievement-btn">
+            📤 Share Achievement
+          </button>
+        </div>
+
+        <!-- Actions -->
+        <div class="home-actions">
+          <button id="continue-btn" class="btn btn-primary btn-large btn-block">
+            Continue →
+          </button>
+          <button id="result-home-btn" class="btn btn-secondary btn-block">
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+         PROGRESS SCREEN
+         ============================================ -->
+    <div id="progress-screen" class="screen">
+      <div class="screen-content">
+        <h2 class="text-center mb-lg">Your Progress</h2>
+
+        <div class="card card-glass mb-lg">
+          <!-- Streak -->
+          <div class="streak-display">
+            <span class="flame-icon">🔥</span>
+            <span id="progress-streak">0</span>
+            <span style="font-size: 1rem; color: var(--color-text-muted);">day streak</span>
+          </div>
+
+          <!-- Main Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span id="progress-total-puzzles" class="stat-value">0</span>
+              <span class="stat-label">Total Puzzles</span>
+            </div>
+            <div class="stat-card">
+              <span id="progress-longest-streak" class="stat-value">0</span>
+              <span class="stat-label">Longest Streak</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accuracy by Difficulty -->
+        <div class="card card-glass mb-lg">
+          <h3 class="mb-md">Accuracy by Difficulty</h3>
+
+          <div class="mb-md">
+            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+              <span>Beginner</span>
+              <span id="accuracy-beginner">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div id="progress-beginner" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="mb-md">
+            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+              <span>Intermediate</span>
+              <span id="accuracy-intermediate">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div id="progress-intermediate" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+              <span>Expert</span>
+              <span id="accuracy-expert">0%</span>
+            </div>
+            <div class="progress-bar">
+              <div id="progress-expert" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Stats -->
+        <div class="card card-glass mb-lg">
+          <h3 class="mb-md">Performance</h3>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <span id="avg-time" class="stat-value">45s</span>
+              <span class="stat-label">Avg Time</span>
+            </div>
+            <div class="stat-card">
+              <span id="total-time" class="stat-value">0m</span>
+              <span class="stat-label">Total Time</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="progress-back-btn" class="btn btn-secondary btn-block">
+          ← Back to Home
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Settings Button -->
+  <div class="settings-button" id="settings-button" title="Settings">
+    ⚙️
+  </div>
+
+  <!-- Settings Panel -->
+  <div class="settings-panel" id="settings-panel">
+    <div class="settings-header">
+      <h2>Settings</h2>
+      <button class="settings-close" id="settings-close">✕</button>
+    </div>
+
+    <div class="settings-section">
+      <h3>Audio & Haptics</h3>
+      <div class="settings-option">
+        <div class="settings-option-label">
+          <strong>Sound Effects</strong>
+          <span>Play sounds for actions and feedback</span>
+        </div>
+        <div class="toggle-switch active" id="sound-toggle"></div>
+      </div>
+      <div class="settings-option">
+        <div class="settings-option-label">
+          <strong>Haptic Feedback</strong>
+          <span>Vibration feedback on mobile devices</span>
+        </div>
+        <div class="toggle-switch active" id="haptic-toggle"></div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Tutorial</h3>
+      <button class="btn btn-secondary btn-block" id="replay-tutorial-btn">
+        Replay Tutorial
+      </button>
+    </div>
+
+    <div class="settings-section">
+      <h3>About</h3>
+      <p style="color: var(--color-text-muted); font-size: 0.875rem;">
+        MindSpark v1.0<br>
+        Train your thinking, not your memory
+      </p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/puzzles.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="js/share.js"></script>
+  <script src="js/hints.js"></script>
+  <script src="js/gameEngine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
