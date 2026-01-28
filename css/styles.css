@@ -86,6 +86,8 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  /* Fix: Force full height */
 }
 
 body {
@@ -94,7 +96,14 @@ body {
   color: var(--color-text-primary);
   line-height: 1.6;
   min-height: 100vh;
+  /* iOS Fix: Use special unit for full height */
+  min-height: -webkit-fill-available;
   overflow-x: hidden;
+  /* iOS Fix: Prevent bounce scroll */
+  overscroll-behavior-y: none;
+  /* iOS Fix: Safe area padding */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* ============================================
