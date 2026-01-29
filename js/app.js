@@ -161,6 +161,14 @@ const App = {
 
     // Show specific screen
     showScreen(screenId) {
+        // v2.0: Check for session end (leaving gameplay or result screen)
+        // Triggers when moving from Game->Home or Result->Home, but not Game<->Result
+        const currentScreen = GameEngine.state.currentScreen;
+        if ((currentScreen === 'gameplay-screen' || currentScreen === 'result-screen') &&
+            (screenId !== 'gameplay-screen' && screenId !== 'result-screen')) {
+            this.showSessionEndModal();
+        }
+
         // Hide all screens
         document.querySelectorAll('.screen').forEach(screen => {
             screen.classList.remove('active');
@@ -500,6 +508,22 @@ const App = {
         // Update performance stats
         document.getElementById('avg-time').textContent = GameEngine.formatTime(analytics.avgTimePerPuzzle);
         document.getElementById('total-time').textContent = `${analytics.totalTimeSpent}m`;
+
+        // Render session stats (v2.0)
+        const sessionSummary = AnalyticsManager.getSessionSummary();
+        const sessionCard = document.getElementById('session-stats-card');
+
+        if (sessionSummary && sessionSummary.attempted > 0) {
+            sessionCard.style.display = 'block';
+            document.getElementById('session-attempted').textContent = sessionSummary.attempted;
+            document.getElementById('session-cleared').textContent = sessionSummary.cleared;
+            document.getElementById('session-failed').textContent = sessionSummary.failed;
+            document.getElementById('session-accuracy').textContent = sessionSummary.accuracy + '%';
+            document.getElementById('session-duration').textContent = sessionSummary.duration;
+            document.getElementById('session-best-streak').textContent = sessionSummary.bestStreak;
+        } else {
+            sessionCard.style.display = 'none';
+        }
 
         this.showScreen('progress-screen');
     },
@@ -926,6 +950,87 @@ const App = {
         if (SoundManager && SoundManager.playMilestone) {
             SoundManager.playMilestone();
             SoundManager.vibrateSuccess();
+        }
+    },
+
+    // v2.0: Show Session End Modal
+    showSessionEndModal() {
+        const summary = AnalyticsManager.getSessionSummary();
+
+        // Only show if user actually played some puzzles
+        if (!summary || summary.attempted === 0) return;
+
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        // Add animation class
+        setTimeout(() => modal.classList.add('visible'), 10);
+
+        modal.innerHTML = `
+            <div class="modal-content card-glass" style="max-width: 500px; text-align: center; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+                <h2 style="margin-bottom: 0.5rem;">🎉 Session Complete!</h2>
+                <p style="color: var(--color-text-muted); margin-bottom: 2rem;">Here's how you performed</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div class="stat-box">
+                        <div style="font-size: 2.5rem; font-weight: bold; line-height: 1;">${summary.attempted}</div>
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.5rem;">Puzzles</div>
+                    </div>
+                    <div class="stat-box">
+                        <div style="font-size: 2.5rem; font-weight: bold; line-height: 1; color: var(--color-success);">${summary.cleared}</div>
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.5rem;">Cleared ✅</div>
+                    </div>
+                    <div class="stat-box">
+                        <div style="font-size: 2.5rem; font-weight: bold; line-height: 1; color: var(--color-error);">${summary.failed}</div>
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.5rem;">Failed ❌</div>
+                    </div>
+                    <div class="stat-box">
+                        <div style="font-size: 2.5rem; font-weight: bold; line-height: 1; color: var(--color-accent);">${summary.accuracy}%</div>
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted); margin-top: 0.5rem;">Accuracy</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 2rem;">
+                    <div style="font-size: 0.875rem; color: var(--color-text-muted);">Session Duration</div>
+                    <div style="font-size: 1.25rem; font-weight: bold;">${summary.duration}</div>
+                </div>
+
+                <button onclick="App.closeSessionModal()" class="btn btn-primary btn-large btn-block">
+                    Awesome!
+                </button>
+            </div>
+        `;
+
+        // Add minimal styles for the modal if not in CSS
+        if (!document.getElementById('session-modal-styles')) {
+            const style = document.createElement('style');
+            style.id = 'session-modal-styles';
+            style.textContent = `
+                .modal-overlay {
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
+                    z-index: 1000; display: flex; align-items: center; justify-content: center;
+                    opacity: 0; transition: opacity 0.3s ease;
+                }
+                .modal-overlay.visible { opacity: 1; }
+                .modal-overlay.visible .modal-content { transform: scale(1) !important; }
+            `;
+            document.head.appendChild(style);
+        }
+
+        document.body.appendChild(modal);
+
+        // End the session in analytics
+        AnalyticsManager.endSession();
+
+        // Sound
+        SoundManager.playMilestone();
+    },
+
+    closeSessionModal() {
+        const modal = document.querySelector('.modal-overlay');
+        if (modal) {
+            modal.classList.remove('visible');
+            setTimeout(() => modal.remove(), 300);
         }
     }
 };

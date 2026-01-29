@@ -275,6 +275,39 @@
       <div class="screen-content">
         <h2 class="text-center mb-lg">Your Progress</h2>
 
+        <!-- Session Stats Card (v2.0) -->
+        <div class="card card-glass mb-lg" id="session-stats-card" style="display: none;">
+          <h3 class="mb-md">📊 This Session</h3>
+          <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="stat-card">
+              <span id="session-attempted" class="stat-value">0</span>
+              <span class="stat-label">Attempted</span>
+            </div>
+            <div class="stat-card">
+              <span id="session-cleared" class="stat-value" style="color: #4ade80;">0</span>
+              <span class="stat-label">Cleared</span>
+            </div>
+            <div class="stat-card">
+              <span id="session-failed" class="stat-value" style="color: #f87171;">0</span>
+              <span class="stat-label">Failed</span>
+            </div>
+          </div>
+          <div class="stats-grid mt-md">
+            <div class="stat-card">
+              <span id="session-accuracy" class="stat-value">0%</span>
+              <span class="stat-label">Accuracy</span>
+            </div>
+            <div class="stat-card">
+              <span id="session-duration" class="stat-value">0m 0s</span>
+              <span class="stat-label">Duration</span>
+            </div>
+            <div class="stat-card">
+              <span id="session-best-streak" class="stat-value">0</span>
+              <span class="stat-label">Best Streak</span>
+            </div>
+          </div>
+        </div>
+
         <div class="card card-glass mb-lg">
           <!-- Streak -->
           <div class="streak-display">

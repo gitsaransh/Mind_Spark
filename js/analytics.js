@@ -115,7 +115,82 @@ const AnalyticsManager = {
 
         this.saveAnalytics(analytics);
 
+        // Update session stats
+        const currentStreak = ProgressManager.getProgress().currentStreak;
+        this.updateSession(isCorrect, currentStreak);
+
         return analytics;
+    },
+
+    // Session Management (v2.0)
+    startSession() {
+        const progress = ProgressManager.getProgress();
+        progress.currentSession = {
+            startTime: Date.now(),
+            puzzlesAttempted: 0,
+            puzzlesCleared: 0,
+            puzzlesFailed: 0,
+            bestStreak: 0,
+            active: true
+        };
+        ProgressManager.saveProgress(progress);
+    },
+
+    updateSession(isCorrect, currentStreak) {
+        const progress = ProgressManager.getProgress();
+
+        if (!progress.currentSession || !progress.currentSession.active) {
+            this.startSession();
+            // Re-fetch updated progress
+            return this.updateSession(isCorrect, currentStreak);
+        }
+
+        progress.currentSession.puzzlesAttempted++;
+
+        if (isCorrect) {
+            progress.currentSession.puzzlesCleared++;
+        } else {
+            progress.currentSession.puzzlesFailed++;
+        }
+
+        if (currentStreak > progress.currentSession.bestStreak) {
+            progress.currentSession.bestStreak = currentStreak;
+        }
+
+        ProgressManager.saveProgress(progress);
+    },
+
+    getSessionSummary() {
+        const progress = ProgressManager.getProgress();
+        const session = progress.currentSession;
+
+        if (!session || !session.active || session.puzzlesAttempted === 0) {
+            return null;
+        }
+
+        const duration = Date.now() - session.startTime;
+        const minutes = Math.floor(duration / 1000 / 60);
+        const seconds = Math.floor((duration / 1000) % 60);
+        const accuracy = session.puzzlesAttempted > 0
+            ? Math.round((session.puzzlesCleared / session.puzzlesAttempted) * 100)
+            : 0;
+
+        return {
+            attempted: session.puzzlesAttempted,
+            cleared: session.puzzlesCleared,
+            failed: session.puzzlesFailed,
+            accuracy: accuracy,
+            duration: `${minutes}m ${seconds}s`,
+            bestStreak: session.bestStreak
+        };
+    },
+
+    endSession() {
+        const progress = ProgressManager.getProgress();
+        if (progress.currentSession) {
+            progress.currentSession.active = false;
+            ProgressManager.saveProgress(progress);
+        }
     },
 
     // Update streak data

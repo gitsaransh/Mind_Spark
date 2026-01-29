@@ -100,6 +100,15 @@ const ProgressManager = {
             permanentBonuses: {
                 sessionStarterBonus: 2, // Increases to 3 at 30-day streak
                 badges: []
+            },
+            // v2.0: Session Stats
+            currentSession: {
+                startTime: null,
+                puzzlesAttempted: 0,
+                puzzlesCleared: 0,
+                puzzlesFailed: 0,
+                bestStreak: 0,
+                active: false
             }
         };
 
@@ -154,6 +163,19 @@ const ProgressManager = {
             progress.permanentBonuses = {
                 sessionStarterBonus: 2,
                 badges: []
+            };
+            migrated = true;
+        }
+
+        // Add currentSession if missing
+        if (!progress.currentSession) {
+            progress.currentSession = {
+                startTime: null,
+                puzzlesAttempted: 0,
+                puzzlesCleared: 0,
+                puzzlesFailed: 0,
+                bestStreak: 0,
+                active: false
             };
             migrated = true;
         }
