@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mindspark-v7.1';
+const CACHE_NAME = 'mindspark-v7.2';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
