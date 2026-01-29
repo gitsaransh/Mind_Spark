@@ -7,6 +7,7 @@ const ASSETS_TO_CACHE = [
     './js/gameEngine.js',
     './js/puzzles.js',
     './js/storage.js',
+    './js/ads.js',
     './js/analytics.js',
     './js/sounds.js',
     './js/tutorial.js',

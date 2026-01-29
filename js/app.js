@@ -21,6 +21,8 @@ const App = {
 
         // Initialize tutorial for first-time users
         TutorialManager.init();
+        AdsManager.init(); // v2.0
+
 
         // Setup settings panel
         this.setupSettings();

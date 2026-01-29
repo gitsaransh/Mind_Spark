@@ -356,6 +356,171 @@ const PUZZLES = [
     explanation: 'Letters go alphabetically (A, B, C, D, E) and numbers increase by 1 (1, 2, 3, 4, 5).',
     estimatedTime: 45
   },
+  {
+    id: 'pattern_intermediate_6',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What number follows?',
+    content: '80, 40, 20, 10, ?',
+    options: ['5', '0', '2', '8'],
+    correctAnswer: 0,
+    explanation: 'Each number is divided by 2: 80/2=40, 40/2=20, 20/2=10, so 10/2=5.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_7',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the next term:',
+    content: '2, 5, 8, 11, 14, ?',
+    options: ['16', '17', '18', '20'],
+    correctAnswer: 1,
+    explanation: 'The pattern adds 3 each time: 14 + 3 = 17.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_8',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which letter comes next?',
+    content: 'Z, X, V, T, ?',
+    options: ['S', 'R', 'Q', 'P'],
+    correctAnswer: 1,
+    explanation: 'Letters are skipping closer to A: Z (skip Y) X (skip W) V (skip U) T (skip S) R.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_9',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Complete the sequence:',
+    content: '1, 4, 2, 8, 3, 12, 4, ?',
+    options: ['16', '14', '18', '20'],
+    correctAnswer: 0,
+    explanation: 'Two alternating patterns: 1, 2, 3, 4 and 4, 8, 12. Next is 16 (4×4).',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_10',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What number is missing?',
+    content: '1, 10, 100, 1000, ?',
+    options: ['1001', '10000', '5000', '2000'],
+    correctAnswer: 1,
+    explanation: 'Each number is multiplied by 10. Next is 1,000 × 10 = 10,000.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_11',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the next number:',
+    content: '7, 12, 17, 22, ?',
+    options: ['25', '27', '28', '29'],
+    correctAnswer: 1,
+    explanation: 'The pattern adds 5 each time: 22 + 5 = 27.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_12',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What comes next?',
+    content: '3, 9, 27, 81, ?',
+    options: ['162', '243', '100', '300'],
+    correctAnswer: 1,
+    explanation: 'Each number is multiplied by 3: 81 × 3 = 243.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_13',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Complete the pattern:',
+    content: '100, 95, 90, 85, ?',
+    options: ['75', '80', '82', '70'],
+    correctAnswer: 1,
+    explanation: 'The pattern subtracts 5 each time: 85 - 5 = 80.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_14',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which shape number fits?',
+    content: 'Triangle(3), Square(4), Pentagon(5), ?',
+    options: ['Circle(1)', 'Hexagon(6)', 'Cube(8)', 'Line(2)'],
+    correctAnswer: 1,
+    explanation: 'Shapes are typically ordered by sides: 3, 4, 5, so next is Hexagon(6).',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_15',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the next term:',
+    content: '1.5, 3.0, 4.5, 6.0, ?',
+    options: ['7.0', '7.5', '8.0', '6.5'],
+    correctAnswer: 1,
+    explanation: 'The pattern adds 1.5 each time: 6.0 + 1.5 = 7.5.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_16',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What comes next?',
+    content: '2, 3, 5, 7, 11, ?',
+    options: ['12', '13', '14', '15'],
+    correctAnswer: 1,
+    explanation: 'These are the first few prime numbers. Next prime after 11 is 13.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_17',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Complete the sequence:',
+    content: '111, 222, 333, 444, ?',
+    options: ['555', '666', '123', '543'],
+    correctAnswer: 0,
+    explanation: 'Triple digits increasing: 1, 2, 3, 4, so next is 555.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_18',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the missing group:',
+    content: 'AZ, BY, CX, DW, ?',
+    options: ['EV', 'EU', 'FV', 'EW'],
+    correctAnswer: 0,
+    explanation: 'First letter goes A->E, second letter goes Z->V (reverse alphabet). Next is EV.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_19',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What number follows?',
+    content: '1, 2, 4, 7, 11, ?',
+    options: ['15', '16', '14', '18'],
+    correctAnswer: 1,
+    explanation: 'The difference increases by 1 each time: +1, +2, +3, +4. So +5 to 11 is 16.',
+    estimatedTime: 45
+  },
+  {
+    id: 'pattern_intermediate_20',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Complete the pattern:',
+    content: '24, 12, 6, 3, ?',
+    options: ['1', '0', '1.5', '2'],
+    correctAnswer: 2,
+    explanation: 'Each number is halved: 24/2=12, 12/2=6, 6/2=3, so 3/2 = 1.5.',
+    estimatedTime: 45
+  },
 
   // ============================================
   // PATTERN COMPLETION - EXPERT
@@ -413,6 +578,171 @@ const PUZZLES = [
     options: ['28', '30', '16', '21'],
     correctAnswer: 1,
     explanation: 'Pattern alternates: +1, ×2, +1, ×2. So 15×2 = 30.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_6',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Find the next term:',
+    content: '0, 1, 1, 2, 3, 5, 8, 13, ?',
+    options: ['21', '20', '19', '25'],
+    correctAnswer: 0,
+    explanation: 'Fibonacci sequence: each number is sum of previous two. 8+13=21.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_7',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Complete the sequence:',
+    content: '2, 5, 11, 23, 47, ?',
+    options: ['95', '94', '96', '92'],
+    correctAnswer: 0,
+    explanation: 'Rule is x2 + 1. 47x2 + 1 = 95.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_8',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'What comes next?',
+    content: 'J, F, M, A, M, J, ?',
+    options: ['J', 'A', 'S', 'O'],
+    correctAnswer: 0,
+    explanation: 'First letter of months: January, February, March... next is July (J).',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_9',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Find the missing number:',
+    content: '1, 4, 27, 16, 125, ?',
+    options: ['36', '216', '49', '64'],
+    correctAnswer: 0,
+    explanation: 'Alternating powers: 1¹, 2², 3³, 4², 5³. Next is 6² = 36.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_10',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Which number fits?',
+    content: '7, 10, 8, 11, 9, 12, ?',
+    options: ['10', '13', '14', '7'],
+    correctAnswer: 0,
+    explanation: 'Alternating +3, -2. 9+3=12, 12-2=10.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_11',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Complete the pattern:',
+    content: 'O, T, T, F, F, S, S, ?',
+    options: ['E', 'N', 'T', 'S'],
+    correctAnswer: 0,
+    explanation: 'First letter of numbers: One, Two, Three, Four... Eight starts with E.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_12',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'What is next?',
+    content: '3, 5, 9, 17, 33, ?',
+    options: ['65', '60', '50', '66'],
+    correctAnswer: 0,
+    explanation: 'Formula is 2^n + 1. 2⁵+1=33, 2⁶+1=65. Or (x2 - 1).',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_13',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Find the next term:',
+    content: '2, 9, 28, 65, ?',
+    options: ['126', '125', '100', '80'],
+    correctAnswer: 0,
+    explanation: 'n³ + 1. 1³+1=2, 2³+1=9... 5³+1=126.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_14',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Which letter follows?',
+    content: 'A, F, K, P, ?',
+    options: ['U', 'V', 'T', 'W'],
+    correctAnswer: 0,
+    explanation: 'Skips 4 letters (adds 5): A(+5)->F(+5)->K... P+5 = U.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_15',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'What number is missing?',
+    content: '4, 6, 9, 13.5, ?',
+    options: ['20.25', '18', '21', '25'],
+    correctAnswer: 0,
+    explanation: 'Multiply by 1.5 each time. 13.5 * 1.5 = 20.25.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_16',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Complete the sequence:',
+    content: '1, 11, 21, 1211, 111221, ?',
+    options: ['312211', '122111', '111111', '123456'],
+    correctAnswer: 0,
+    explanation: 'Look-and-say sequence. "One 1" -> 11. "Three 1s, Two 2s, One 1" -> 312211.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_17',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Determine the next value:',
+    content: '31, 28, 31, 30, 31, ?',
+    options: ['30', '31', '29', '28'],
+    correctAnswer: 0,
+    explanation: 'Days in months: Jan(31), Feb(28), Mar(31), Apr(30), May(31). June has 30.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_18',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Find the logic:',
+    content: '1=3, 2=3, 3=5, 4=4, 5=4, 6=?',
+    options: ['3', '4', '5', '6'],
+    correctAnswer: 0,
+    explanation: 'Number of letters in the word: One(3), Two(3), Six(3).',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_19',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'Complete the pattern:',
+    content: '1000, 500, 200, 100, 40, 20, ?',
+    options: ['8', '10', '5', '4'],
+    correctAnswer: 0,
+    explanation: 'Divisors alternate: /2, /2.5, /2, /2.5... so 20 / 2.5 = 8.',
+    estimatedTime: 60
+  },
+  {
+    id: 'pattern_expert_20',
+    type: PUZZLE_TYPES.PATTERN,
+    difficulty: DIFFICULTY.EXPERT,
+    question: 'What comes next?',
+    content: 'Z, O, T, T, F, F, S, S, E, ?',
+    options: ['N', 'T', 'E', 'Z'],
+    correctAnswer: 0,
+    explanation: 'First letters of Zero, One, Two... Nine starts with N.',
     estimatedTime: 60
   },
 
