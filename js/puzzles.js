@@ -863,6 +863,116 @@ const PUZZLES = [
     explanation: 'Painting is visual art. Piano, Guitar, and Violin are musical instruments.',
     estimatedTime: 40
   },
+  {
+    id: 'odd_intermediate_6',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which is the odd one?',
+    content: 'Cricket, Hockey, Football, Reading',
+    options: ['Cricket', 'Hockey', 'Football', 'Reading'],
+    correctAnswer: 3,
+    explanation: 'Reading is a solitary mental hobby; the others are physical team sports.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_7',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the different one:',
+    content: 'Delhi, Mumbai, Kolkata, India',
+    options: ['Delhi', 'Mumbai', 'Kolkata', 'India'],
+    correctAnswer: 3,
+    explanation: 'India is the country itself. Delhi, Mumbai, and Kolkata are cities within it.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_8',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which word does not belong?',
+    content: 'Keyboard, Mouse, Monitor, Printer',
+    options: ['Keyboard', 'Mouse', 'Monitor', 'Printer'],
+    correctAnswer: 2,
+    explanation: 'Monitor is primarily an output device (visual). Keyboard and Mouse are input devices. Printer produces hard copy.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_9',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Select the outlier:',
+    content: 'Dollar, Euro, Yen, Coin',
+    options: ['Dollar', 'Euro', 'Yen', 'Coin'],
+    correctAnswer: 3,
+    explanation: 'Coin is a physical form of money. Dollar, Euro, and Yen are specific currencies.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_10',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which shape is unique?',
+    content: 'Cylinder, Sphere, Cube, Circle',
+    options: ['Cylinder', 'Sphere', 'Cube', 'Circle'],
+    correctAnswer: 3,
+    explanation: 'Circle is a 2D shape. Cylinder, Sphere, and Cube are 3D objects.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_11',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the odd one out:',
+    content: 'Train, Bus, Car, Airplane',
+    options: ['Train', 'Bus', 'Car', 'Airplane'],
+    correctAnswer: 3,
+    explanation: 'Airplane travels by air. Train, Bus, and Car travel on land.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_12',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which does not fit?',
+    content: 'Winter, Summer, Monsoon, Umbrella',
+    options: ['Winter', 'Summer', 'Monsoon', 'Umbrella'],
+    correctAnswer: 3,
+    explanation: 'Umbrella is an object. Winter, Summer, and Monsoon are seasons.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_13',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the different one:',
+    content: 'Rose, Lotus, Sunflower, Cauliflower',
+    options: ['Rose', 'Lotus', 'Sunflower', 'Cauliflower'],
+    correctAnswer: 3,
+    explanation: 'Cauliflower is a vegetable. The others are types of flowers.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_14',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which number does not belong?',
+    content: '1, 3, 5, 8',
+    options: ['1', '3', '5', '8'],
+    correctAnswer: 3,
+    explanation: '8 is an even number. 1, 3, and 5 are odd numbers.',
+    estimatedTime: 40
+  },
+  {
+    id: 'odd_intermediate_15',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which is the odd one?',
+    content: 'YouTube, WhatsApp, Instagram, Google',
+    options: ['YouTube', 'WhatsApp', 'Instagram', 'Google'],
+    correctAnswer: 3,
+    explanation: 'Google is primarily a search engine. The others are strictly social media/video platforms (though owned by tech giants).',
+    estimatedTime: 40
+  },
 
   // ============================================
   // ODD ONE OUT - EXPERT
@@ -1038,6 +1148,171 @@ const PUZZLES = [
     options: ['Plants thrive', 'Plants wilt and die', 'Plants grow faster', 'Nothing happens'],
     correctAnswer: 1,
     explanation: 'Plants need water to survive. Three weeks without water in summer is fatal.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_6',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the likely result?',
+    content: 'A chef adds too much salt to the curry while cooking.',
+    options: ['It becomes sweet', 'It becomes inedible', 'It changes color', 'It cooks faster'],
+    correctAnswer: 1,
+    explanation: 'Excessive salt overpowers other flavors, making the dish too salty to eat.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_7',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What happens next?',
+    content: 'You leave a glass of cold water outside on a hot summer afternoon.',
+    options: ['It freezes', 'Water droplets form outside', 'It turns into milk', 'The glass breaks'],
+    correctAnswer: 1,
+    explanation: 'Condensation occurs when warm air touches the cold surface of the glass.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_8',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the consequence?',
+    content: 'A driver ignores the red traffic light at a busy junction.',
+    options: ['They save time safely', 'High risk of accident', 'Traffic stops for them', 'Nothing happens'],
+    correctAnswer: 1,
+    explanation: 'Ignoring traffic signals disrupts the flow and creates a high danger collision risk.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_9',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the outcome?',
+    content: 'A student writes an exam with a pen that is running out of ink.',
+    options: ['Handwriting improves', 'The paper tears', 'Writing becomes faint/illegible', 'The pen refills itself'],
+    correctAnswer: 2,
+    explanation: 'Low ink causes skipping and faint lines, making the text hard to read.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_10',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What will likely happen?',
+    content: 'You wear thick woolen clothes on a sunny beach day.',
+    options: ['You feel cold', 'You overheat and sweat', 'You get a tan faster', 'You feel comfortable'],
+    correctAnswer: 1,
+    explanation: 'Wool insulates heat. Wearing it in hot weather traps body heat.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_11',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the result?',
+    content: 'A phone is dropped into a bucket of water.',
+    options: ['Battery charges', 'Screen gets brighter', 'Internal damage likely', 'It becomes waterproof'],
+    correctAnswer: 2,
+    explanation: 'Water damages electronic circuits unless the device is specifically waterproof.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_12',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What happens if?',
+    content: 'You over-inflate a balloon beyond its limit.',
+    options: ['It floats higher', 'It bursts', 'It becomes heavy', 'It shrinks'],
+    correctAnswer: 1,
+    explanation: 'Rubber has an elastic limit. Exceeding it causes the material to fail (pop).',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_13',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the consequence?',
+    content: 'A person eats sugary sweets every day without brushing teeth.',
+    options: ['Teeth become stronger', 'Cavities and decay form', 'Breath smells like mint', 'Nothing happens'],
+    correctAnswer: 1,
+    explanation: 'Sugar feeds bacteria that produce acid, leading to tooth decay.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_14',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the likely outcome?',
+    content: 'Heavy rains continue for days without drainage.',
+    options: ['Drought', 'Flooding/Waterlogging', 'Plants die of thirst', 'Dust storms'],
+    correctAnswer: 1,
+    explanation: 'Excess water that cannot drain away accumulates, causing floods.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_15',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What happens when?',
+    content: 'You mix blue paint with yellow paint.',
+    options: ['It turns Red', 'It turns Green', 'It turns Purple', 'It stays Blue'],
+    correctAnswer: 1,
+    explanation: 'Blue and Yellow are primary colors that mix to create Green.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_16',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the result?',
+    content: 'A candle is covered with a glass jar.',
+    options: ['It burns brighter', 'It changes color', 'It goes out', 'It melts instantly'],
+    correctAnswer: 2,
+    explanation: 'Fire needs oxygen to burn. The jar limits the oxygen supply.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_17',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What happens if?',
+    content: 'You put too much detergent in the washing machine.',
+    options: ['Clothes get cleaner', 'Excess foam overflows', 'Machine runs faster', 'Clothes shrink'],
+    correctAnswer: 1,
+    explanation: 'Too much soap creates excessive suds that can block hoses or overflow.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_18',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the consequence?',
+    content: 'A laptop fan stops working while running heavy software.',
+    options: ['Laptop runs faster', 'Laptop overheats/crashes', 'Battery lasts longer', 'Screen gets clearer'],
+    correctAnswer: 1,
+    explanation: 'Fans dissipate heat. Without cooling, the processor overheats.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_19',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What is the outcome?',
+    content: 'You shout loudly in a large, empty hall.',
+    options: ['Silence', 'An echo', 'Sound disappears', 'Walls break'],
+    correctAnswer: 1,
+    explanation: 'Sound waves bounce off hard, distant surfaces creating an echo.',
+    estimatedTime: 45
+  },
+  {
+    id: 'cause_intermediate_20',
+    type: PUZZLE_TYPES.CAUSE_EFFECT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'What happens when?',
+    content: 'Iron is left outside in wet weather for weeks.',
+    options: ['It shines brighter', 'It rusts', 'It becomes soft', 'It turns into gold'],
+    correctAnswer: 1,
+    explanation: 'Iron reacts with oxygen and moisture to form rust (iron oxide).',
     estimatedTime: 45
   },
 
