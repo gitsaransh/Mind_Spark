@@ -1,0 +1,10 @@
+{
+  "appId": "com.mindspark.puzzlegame",
+  "appName": "MindSpark",
+  "webDir": "www",
+  "plugins": {
+    "AdMob": {
+      "appId": "ca-app-pub-4564028467824607~7976884590"
+    }
+  }
+}

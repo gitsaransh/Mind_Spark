@@ -1,0 +1,27 @@
+{
+  "name": "mind_spark",
+  "version": "1.0.0",
+  "description": "**An engaging analytical thinking puzzle game with streak-based progression**",
+  "main": "test_helper.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitsaransh/Mind_Spark.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gitsaransh/Mind_Spark/issues"
+  },
+  "homepage": "https://github.com/gitsaransh/Mind_Spark#readme",
+  "dependencies": {
+    "@capacitor-community/admob": "^8.0.0",
+    "@capacitor/android": "^8.0.2",
+    "@capacitor/cli": "^8.0.2",
+    "@capacitor/core": "^8.0.2"
+  }
+}

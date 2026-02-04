@@ -1,0 +1,15 @@
+// ============================================
+// COPY AND PASTE THIS INTO CONSOLE
+// ============================================
+
+// Step 1: Load test helper
+fetch('/test_helper.js').then(r=>r.text()).then(eval)
+
+// Step 2: After Step 1 completes, run this:
+TestHelper.testAllNotifications()
+
+// ============================================
+// OR USE THIS ALL-IN-ONE VERSION:
+// ============================================
+
+console.log('🧪 Testing all v2.0 notifications...\n');setTimeout(() => {console.log('1️⃣ Session Starter...');App.showSessionStarterBonus(2, 5);}, 500);setTimeout(() => {console.log('2️⃣ Milestone Reward...');App.showMilestoneReward(7, 2);}, 2500);setTimeout(() => {console.log('3️⃣ Soft Reset...');App.showSoftResetNotification(15, 9);}, 5000);setTimeout(() => {console.log('4️⃣ Streak Freeze...');App.showStreakFreezeReward();}, 7500);console.log('✅ Watch for 4 notifications over 10 seconds!');
