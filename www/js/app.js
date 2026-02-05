@@ -3,9 +3,10 @@
 // ============================================
 
 const App = {
+    lastNavigationTime: 0, // Prevent ghost clicks
     // Initialize application
     init() {
-        console.log('🚀 MindSpark starting...');
+
 
         // Initialize game engine
         GameEngine.init();
@@ -27,7 +28,7 @@ const App = {
         // Setup settings panel
         this.setupSettings();
 
-        console.log('✅ MindSpark ready!');
+
     },
 
     // v2.0: Check and award session starter bonus
@@ -59,10 +60,10 @@ const App = {
                 }, 1000);
             }
 
-            console.log(`✅ Session bonus awarded: +${bonus} points (${hoursSince}h since last session)`);
+
         } else {
             const minutesSince = Math.floor((now - lastPuzzleTime) / (60 * 1000));
-            console.log(`ℹ️ No session bonus (last played ${minutesSince} minutes ago)`);
+
         }
     },
 
@@ -182,23 +183,18 @@ const App = {
         });
     },
 
-    // Select Mode
-    selectMode(mode) {
-        GameEngine.setMode(mode);
-        // Note: Screen transition happens in event listener loop
-    },
+
 
     // Select Category (v2.1)
     selectCategory(category) {
+        // Prevent accidental clicks on screen transition
+        if (Date.now() - this.lastNavigationTime < 500) return;
+
         GameEngine.setCategory(category);
         this.showScreen('difficulty-screen');
     },
 
-    // Select Difficulty
-    selectDifficulty(difficulty) {
-        GameEngine.setDifficulty(difficulty);
-        this.startPuzzle();
-    },
+
 
     // Show specific screen
     showScreen(screenId) {
@@ -220,6 +216,7 @@ const App = {
         if (targetScreen) {
             targetScreen.classList.add('active');
             GameEngine.state.currentScreen = screenId;
+            this.lastNavigationTime = Date.now(); // Record navigation time
         }
     },
 
@@ -386,6 +383,10 @@ const App = {
         if (puzzle) {
             this.loadPuzzle(puzzle);
             this.showScreen('gameplay-screen');
+        } else {
+            // No puzzle found (likely missing content for Category + Difficulty combo)
+            alert("This category doesn't have puzzles for this difficulty yet. Please try 'Pattern' or 'Mixed'!");
+            // Go back slightly to re-enable interaction if needed, or just stay to let them choose another
         }
     },
 

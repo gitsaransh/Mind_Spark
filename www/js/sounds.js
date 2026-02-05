@@ -14,7 +14,7 @@ const SoundManager = {
         // Create audio context
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-        console.log('🔊 Sound Manager initialized');
+
     },
 
     // Generate beep sound using Web Audio API

@@ -11,7 +11,7 @@ const HintSystem = {
 
     init() {
         this.currentPuzzleHintsUsed = 0;
-        console.log('💡 Hint System v2.0 initialized');
+
     },
 
     // Check if user can afford a hint

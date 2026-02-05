@@ -29,7 +29,7 @@ const AdsManager = {
     async init() {
         if (this.state.isInitialized) return;
 
-        console.log('🎬 AdsManager: Initializing...');
+
 
         // Check if running on Native Platform (Android/iOS)
         if (this.isNativePlatform()) {
@@ -50,7 +50,6 @@ const AdsManager = {
                         initializeForTesting: this.config.testMode,
                     });
                     this.state.isInitialized = true;
-                    console.log('✅ AdsManager: AdMob Initialized (Native)');
                 } else {
                     console.warn('⚠️ AdsManager: AdMob plugin not found. Is it installed?');
                 }
@@ -71,7 +70,6 @@ const AdsManager = {
     // Initialize Web As (AdSense)
     initWebAds() {
         if (!this.config.webAdUnitId.includes('pub-')) {
-            console.log('⚠️ AdsManager: No Web Publisher ID. Mocking web ads.');
             return;
         }
 
@@ -80,13 +78,12 @@ const AdsManager = {
         script.async = true;
         script.crossOrigin = 'anonymous';
         document.head.appendChild(script);
-        console.log('✅ AdsManager: Web AdSense Script Injected');
         this.state.isInitialized = true;
     },
 
     // Show Rewarded Video Ad
     async showRewardedAd() {
-        console.log('🎁 AdsManager: Requesting Rewarded Ad');
+
 
         // 1. Native AdMob
         if (this.isNativePlatform()) {

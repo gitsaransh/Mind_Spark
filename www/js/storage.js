@@ -192,7 +192,7 @@ const ProgressManager = {
         // Save if migrated
         if (migrated) {
             this.saveProgress(progress);
-            console.log('✅ Migrated user data to v2.0');
+
         }
 
         return progress;

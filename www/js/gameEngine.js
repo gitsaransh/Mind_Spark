@@ -28,7 +28,7 @@ const GameEngine = {
 
     // Initialize game
     init() {
-        console.log('🎮 MindSpark Game Engine initialized');
+
         AnalyticsManager.startSession();
         this.loadState();
     },
@@ -54,20 +54,20 @@ const GameEngine = {
     setMode(mode) {
         this.state.selectedMode = mode;
         this.savePreferences();
-        console.log(`Mode set to: ${mode}`);
+
     },
 
     // Set difficulty
     setDifficulty(difficulty) {
         this.state.selectedDifficulty = difficulty;
         this.savePreferences();
-        console.log(`Difficulty set to: ${difficulty}`);
+
     },
 
     // Set category (practice mode)
     setCategory(category) {
         this.state.selectedCategory = category;
-        console.log(`Category set to: ${category}`);
+
     },
 
     // Start a new puzzle
@@ -112,7 +112,7 @@ const GameEngine = {
             this.startTimer();
         }
 
-        console.log(`Started puzzle: ${puzzle.id} (${puzzle.type}, ${puzzle.difficulty})`);
+
         return puzzle;
     },
 
@@ -156,7 +156,7 @@ const GameEngine = {
     // Select an answer
     selectAnswer(answerIndex) {
         this.state.selectedAnswer = answerIndex;
-        console.log(`Answer selected: ${answerIndex}`);
+
     },
 
     // Check and award badges
@@ -175,7 +175,7 @@ const GameEngine = {
 
         if (newBadges.length > 0) {
             ProgressManager.saveProgress(progress);
-            console.log(`🏆 Earned ${newBadges.length} new badges`);
+
         }
 
         return newBadges;
@@ -243,7 +243,7 @@ const GameEngine = {
                     progress.currentStreak += bonus;
                     ProgressManager.saveProgress(progress);
 
-                    console.log(`🎉 Milestone reached: ${streak}! Awarded +${bonus} bonus points.`);
+
 
                     // Show notification in UI
                     if (typeof App !== 'undefined' && App.showMilestoneReward) {
@@ -263,7 +263,7 @@ const GameEngine = {
             }
         } else {
             // Practice Mode: Don't record progress
-            console.log("🛡️ Practice Mode: Stats not updated");
+
             progress = ProgressManager.getProgress();
         }
 
@@ -278,7 +278,7 @@ const GameEngine = {
             earnedBadges: earnedBadges
         };
 
-        console.log('Puzzle result:', result);
+
         return result;
     },
 
