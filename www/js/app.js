@@ -197,7 +197,7 @@ const App = {
     // Select Difficulty
     selectDifficulty(difficulty) {
         GameEngine.setDifficulty(difficulty);
-        this.startGame();
+        this.startPuzzle();
     },
 
     // Show specific screen
