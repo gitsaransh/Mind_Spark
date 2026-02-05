@@ -161,66 +161,21 @@ const GameEngine = {
 
     // Check and award badges
     checkBadges(progress, isCorrect) {
-        const badges = [
-            {
-                id: 'speed_demon', name: 'Speed Demon', icon: '⚡', desc: 'Solve a puzzle in under 10 seconds',
-                condition: (p) => isCorrect && this.state.timeElapsed <= 10
-            },
-            {
-                id: 'logic_master', name: 'LogicMaster', icon: '🧠', desc: 'Solve 10 Logic puzzles',
-                condition: (p) => p.puzzlesByType && p.puzzlesByType.logic >= 10
-            },
-            {
-                id: 'math_whiz', name: 'Math Whiz', icon: '🔢', desc: 'Solve 10 Math puzzles',
-                condition: (p) => p.puzzlesByType && p.puzzlesByType.math >= 10
-            },
-            {
-                id: 'pattern_pro', name: 'Pattern Pro', icon: '🧩', desc: 'Solve 10 Pattern puzzles',
-                condition: (p) => p.puzzlesByType && p.puzzlesByType.pattern >= 10
-            },
-            {
-                id: 'dedication', name: 'Dedication', icon: '📅', desc: 'Reach a 7-day streak',
-                condition: (p) => p.currentStreak >= 7
-            },
-            {
-                id: 'century', name: 'Century Club', icon: '💯', desc: 'Solve 100 puzzles total',
-                condition: (p) => p.totalPuzzlesSolved >= 100
-            }
-        ];
-
-        let newBadges = [];
-        // Ensure badges array exists in progress snapshot (it should come from storage)
-        // But we need to modify the LIVE progress object, which ProgressManager should have returned/saved.
-        // Actually, ProgressManager.recordPuzzle saves it. We need to intercept or update it again.
-        // Let's rely on checking the progress object passed in.
-
-        if (!progress.permanentBonuses) {
-            progress.permanentBonuses = { badges: [] };
-        } else if (!progress.permanentBonuses.badges) {
-            progress.permanentBonuses.badges = [];
+        if (typeof BadgeManager === 'undefined') {
+            console.warn('BadgeManager not loaded');
+            return [];
         }
 
-        badges.forEach(badge => {
-            // Check if already owned
-            const hasBadge = progress.permanentBonuses.badges.some(b => b.id === badge.id);
-            if (!hasBadge) {
-                if (badge.condition(progress)) {
-                    const badgeObj = {
-                        id: badge.id,
-                        name: badge.name,
-                        icon: badge.icon,
-                        desc: badge.desc,
-                        date: new Date().toISOString()
-                    };
-                    progress.permanentBonuses.badges.push(badgeObj);
-                    newBadges.push(badgeObj);
-                    console.log(`🏆 Badge Earned: ${badge.name}`);
-                }
-            }
-        });
+        const context = {
+            isCorrect: isCorrect,
+            timestamp: Date.now()
+        };
+
+        const newBadges = BadgeManager.checkForNewBadges(progress, context);
 
         if (newBadges.length > 0) {
             ProgressManager.saveProgress(progress);
+            console.log(`🏆 Earned ${newBadges.length} new badges`);
         }
 
         return newBadges;
@@ -243,64 +198,73 @@ const GameEngine = {
         // Stop timer
         this.stopTimer();
 
-        // Record in progress
-        const progress = ProgressManager.recordPuzzle(
-            puzzle.id,
-            isCorrect,
-            puzzle.difficulty,
-            puzzle.type,
-            this.state.timeElapsed
-        );
+        // Record in progress (only if NOT practice mode)
+        let progress;
+        let earnedBadges = [];
 
-        // v2.1: Check Badges
-        const earnedBadges = this.checkBadges(progress, isCorrect);
+        if (this.state.selectedMode !== 'practice') {
+            progress = ProgressManager.recordPuzzle(
+                puzzle.id,
+                isCorrect,
+                puzzle.difficulty,
+                puzzle.type,
+                this.state.timeElapsed
+            );
 
-        // Track in analytics
-        AnalyticsManager.trackPuzzleCompletion(
-            puzzle.id,
-            puzzle.difficulty,
-            puzzle.type,
-            isCorrect,
-            this.state.timeElapsed
-        );
+            // v2.1: Check Badges
+            earnedBadges = this.checkBadges(progress, isCorrect);
 
-        // v2.0: Check for Milestone Rewards
-        if (isCorrect) {
-            const streak = progress.currentStreak;
-            // Define milestones: { streak: bonus }
-            const MILESTONES = {
-                7: 2,   // Lucky 7
-                10: 3,  // Perfect 10 (Bonus points!)
-                15: 3,  // 15 Streak
-                20: 5,  // 20 Streak
-                25: 5,  // 25 Streak
-                30: 10  // Monthly Master
-            };
+            // Track in analytics
+            AnalyticsManager.trackPuzzleCompletion(
+                puzzle.id,
+                puzzle.difficulty,
+                puzzle.type,
+                isCorrect,
+                this.state.timeElapsed
+            );
 
-            if (MILESTONES[streak]) {
-                const bonus = MILESTONES[streak];
+            // v2.0: Check for Milestone Rewards
+            if (isCorrect) {
+                const streak = progress.currentStreak;
+                // Define milestones: { streak: bonus }
+                const MILESTONES = {
+                    7: 2,   // Lucky 7
+                    10: 3,  // Perfect 10 (Bonus points!)
+                    15: 3,  // 15 Streak
+                    20: 5,  // 20 Streak
+                    25: 5,  // 25 Streak
+                    30: 10  // Monthly Master
+                };
 
-                // Add bonus points
-                progress.currentStreak += bonus;
-                ProgressManager.saveProgress(progress);
+                if (MILESTONES[streak]) {
+                    const bonus = MILESTONES[streak];
 
-                console.log(`🎉 Milestone reached: ${streak}! Awarded +${bonus} bonus points.`);
+                    // Add bonus points
+                    progress.currentStreak += bonus;
+                    ProgressManager.saveProgress(progress);
 
-                // Show notification in UI
-                if (typeof App !== 'undefined' && App.showMilestoneReward) {
-                    setTimeout(() => {
-                        App.showMilestoneReward(streak, bonus);
-                    }, 500); // Slight delay for effect
+                    console.log(`🎉 Milestone reached: ${streak}! Awarded +${bonus} bonus points.`);
+
+                    // Show notification in UI
+                    if (typeof App !== 'undefined' && App.showMilestoneReward) {
+                        setTimeout(() => {
+                            App.showMilestoneReward(streak, bonus);
+                        }, 500); // Slight delay for effect
+                    }
                 }
             }
-        }
 
-        // Update streak in analytics
-        AnalyticsManager.updateStreakData(progress.currentStreak, progress.longestStreak);
+            // Update streak in analytics
+            AnalyticsManager.updateStreakData(progress.currentStreak, progress.longestStreak);
 
-        // If daily challenge, mark as completed
-        if (this.state.isDailyChallenge) {
-            DailyChallengeManager.markCompleted(puzzle.id, isCorrect, this.state.timeElapsed);
+            // If daily challenge, mark as completed
+            if (this.state.isDailyChallenge) {
+                DailyChallengeManager.markCompleted(puzzle.id, isCorrect, this.state.timeElapsed);
+            }
+        } else {
+            // Practice Mode: Don't record progress
+            console.log("🛡️ Practice Mode: Stats not updated");
+            progress = ProgressManager.getProgress();
         }
 
         const result = {
