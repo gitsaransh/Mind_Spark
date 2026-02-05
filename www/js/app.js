@@ -86,8 +86,6 @@ const App = {
             card.addEventListener('click', (e) => {
                 const mode = e.currentTarget.dataset.mode;
                 this.selectMode(mode);
-                // v2.1: Go to Category Selection
-                this.showScreen('category-screen');
             });
         });
 
@@ -348,7 +346,8 @@ const App = {
 
         // Small delay for visual feedback, then proceed
         setTimeout(() => {
-            this.showScreen('difficulty-screen');
+            // v2.1: All modes now go to Category Selection first
+            this.showScreen('category-screen');
         }, 300);
     },
 
