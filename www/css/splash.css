@@ -32,7 +32,7 @@
     border-right: 3px solid transparent;
     border-radius: 50%;
     position: relative;
-    animation: logoFadeIn 1s ease-out;
+    animation: logoSpinClockwise 2s linear infinite;
 }
 
 .splash-logo::before {
@@ -47,6 +47,7 @@
     border-right: 2px solid transparent;
     border-radius: 50%;
     opacity: 0.6;
+    animation: logoSpinCounterClockwise 2s linear infinite;
 }
 
 .splash-studio-name {
@@ -90,15 +91,23 @@
     }
 }
 
-@keyframes logoFadeIn {
+@keyframes logoSpinClockwise {
     from {
-        opacity: 0;
-        transform: scale(0.9);
+        transform: rotate(0deg);
     }
 
     to {
-        opacity: 1;
-        transform: scale(1);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes logoSpinCounterClockwise {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
     }
 }
 
