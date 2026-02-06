@@ -6,7 +6,13 @@ const App = {
     lastNavigationTime: 0, // Prevent ghost clicks
     // Initialize application
     init() {
-
+        // Remove Enso Studio splash screen after animation
+        setTimeout(() => {
+            const splash = document.getElementById('splash-screen');
+            if (splash) {
+                splash.remove();
+            }
+        }, 3000); // 3 seconds total (2.5s display + 0.5s fade out)
 
         // Initialize game engine
         GameEngine.init();
@@ -169,8 +175,8 @@ const App = {
 
         // Feedback Button
         document.getElementById('feedback-btn').addEventListener('click', () => {
-            // TODO: Replace with your actual Reddit thread or Google Form URL
-            const feedbackUrl = "https://www.reddit.com/r/WebGames/";
+            // Create your Google Form at: https://forms.google.com and replace this URL
+            const feedbackUrl = "https://forms.gle/YOUR_FORM_ID_HERE";
             window.open(feedbackUrl, '_blank');
         });
 
