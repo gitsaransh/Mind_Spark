@@ -28,7 +28,9 @@
 .splash-logo {
     width: 80px;
     height: 80px;
-    border: 3px solid #00d9ff;
+    border: 3px solid transparent;
+    border-top: 3px solid #00d9ff;
+    border-right: 3px solid #00d9ff;
     border-radius: 50%;
     position: relative;
     animation: logoRotate 2s ease-in-out;
@@ -42,7 +44,9 @@
     transform: translate(-50%, -50%);
     width: 60%;
     height: 60%;
-    border: 2px solid #00d9ff;
+    border: 2px solid transparent;
+    border-top: 2px solid #00d9ff;
+    border-right: 2px solid #00d9ff;
     border-radius: 50%;
     opacity: 0.5;
 }
