@@ -95,7 +95,6 @@ const GameEngine = {
         }
 
         if (!puzzle) {
-            console.error('No puzzle available');
             return null;
         }
 
