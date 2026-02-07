@@ -175,8 +175,8 @@ const App = {
 
         // Feedback Button
         document.getElementById('feedback-btn').addEventListener('click', () => {
-            // Create your Google Form at: https://forms.google.com and replace this URL
-            const feedbackUrl = "https://forms.gle/YOUR_FORM_ID_HERE";
+            // MindSpark Feedback Form
+            const feedbackUrl = "https://docs.google.com/forms/d/e/1FAIpQLSfz_hVMhh6DpfE4kgxl1S4s8OLO-TF-evJLecwVjMXbYm7jZg/viewform";
             window.open(feedbackUrl, '_blank');
         });
 
