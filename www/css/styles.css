@@ -116,8 +116,9 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
-  /* Prevent container scroll, rely on screen content */
+  overflow-y: auto;
+  /* Allow global scroll */
+  /* Prevent container scroll, rely on screen content - DISABLED to allowing footer scroll */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -795,6 +796,18 @@ body {
    ============================================ */
 .text-center {
   text-align: center;
+}
+
+/* ============================================
+   FOOTER STYLES
+   ============================================ */
+footer {
+  margin-top: auto;
+  /* Push to bottom */
+  width: 100%;
+  z-index: 10;
+  position: relative;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
 }
 
 .text-muted {
