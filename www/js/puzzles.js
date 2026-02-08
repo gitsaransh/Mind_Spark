@@ -23,78 +23,234 @@ const DIFFICULTY = {
 // Puzzle Database
 const PUZZLES = [
   // ============================================
-  // MATH - BEGINNER (ADDED TO FIX EMPTY CATEGORY ISSUE)
+  // ODD ONE OUT - BEGINNER & INTERMEDIATE
   // ============================================
+
+  // BEGINNER
   {
-    id: 'math_beginner_1',
-    type: PUZZLE_TYPES.MATH,
+    id: 'odd_beginner_1',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
     difficulty: DIFFICULTY.BEGINNER,
-    question: 'If 2 chocolates cost ₹10, how much do 5 chocolates cost?',
-    content: '2 chocolates = ₹10, 5 chocolates = ?',
-    options: ['₹20', '₹25', '₹30', '₹15'],
+    question: 'Which word does NOT belong?',
+    content: 'Apple, Banana, Carrot, Grape',
+    options: ['Apple', 'Banana', 'Carrot', 'Grape'],
+    correctAnswer: 2,
+    explanation: 'Apple, Banana, and Grape are fruits. Carrot is a vegetable.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_2',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Find the odd one out:',
+    content: 'Car, Bus, Train, Boat',
+    options: ['Car', 'Bus', 'Train', 'Boat'],
+    correctAnswer: 3,
+    explanation: 'Car, Bus, and Train travel on land/rails. Boat travels on water.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_3',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Which word is different?',
+    content: 'Circle, Square, Triangle, Red',
+    options: ['Circle', 'Square', 'Triangle', 'Red'],
+    correctAnswer: 3,
+    explanation: 'Circle, Square, and Triangle are shapes. Red is a color.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_4',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Identify the odd item:',
+    content: 'Dog, Cat, Cow, Shark',
+    options: ['Dog', 'Cat', 'Cow', 'Shark'],
+    correctAnswer: 3,
+    explanation: 'Dog, Cat, and Cow are land mammals. Shark is a sea creature (fish).',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_5',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Select the odd one out:',
+    content: 'January, Friday, March, June',
+    options: ['January', 'Friday', 'March', 'June'],
     correctAnswer: 1,
-    explanation: 'Each chocolate costs ₹5 (10÷2). So 5 chocolates cost ₹25 (5×5).',
+    explanation: 'January, March, and June are months. Friday is a day.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_6',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Which number is the intruder?',
+    content: '2, 4, 6, 9, 10',
+    options: ['2', '4', '9', '10'],
+    correctAnswer: 2,
+    explanation: '2, 4, 6, 10 are even numbers. 9 is an odd number.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_7',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Find the different one:',
+    content: 'Chair, Table, Bed, Pizza',
+    options: ['Chair', 'Table', 'Bed', 'Pizza'],
+    correctAnswer: 3,
+    explanation: 'Chair, Table, and Bed are furniture. Pizza is food.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_8',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Which does NOT fit?',
+    content: 'Eyes, Nose, Ears, Shoes',
+    options: ['Eyes', 'Nose', 'Ears', 'Shoes'],
+    correctAnswer: 3,
+    explanation: 'Eyes, Nose, and Ears are body parts. Shoes are clothing.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_9',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Identify the outlier:',
+    content: 'Football, Tennis, Basketball, Reading',
+    options: ['Football', 'Tennis', 'Basketball', 'Reading'],
+    correctAnswer: 3,
+    explanation: 'Football, Tennis, and Basketball are sports. Reading is a hobby/activity.',
+    estimatedTime: 20
+  },
+  {
+    id: 'odd_beginner_10',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Which one is odd?',
+    content: 'Winter, Summer, Autumn, Umbrella',
+    options: ['Winter', 'Summer', 'Autumn', 'Umbrella'],
+    correctAnswer: 3,
+    explanation: 'Winter, Summer, and Autumn are seasons. Umbrella is an object.',
+    estimatedTime: 20
+  },
+
+  // INTERMEDIATE
+  {
+    id: 'odd_intermediate_1',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which city does NOT belong?',
+    content: 'Paris, London, Berlin, Germany',
+    options: ['Paris', 'London', 'Berlin', 'Germany'],
+    correctAnswer: 3,
+    explanation: 'Paris, London, and Berlin are cities. Germany is a country.',
     estimatedTime: 30
   },
   {
-    id: 'math_beginner_2',
-    type: PUZZLE_TYPES.MATH,
-    difficulty: DIFFICULTY.BEGINNER,
-    question: 'What is 15 + 23?',
-    content: '15 + 23 = ?',
-    options: ['36', '38', '40', '42'],
-    correctAnswer: 1,
-    explanation: '15 + 23 = 38',
+    id: 'odd_intermediate_2',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the odd number:',
+    content: '81, 64, 49, 50',
+    options: ['81', '64', '49', '50'],
+    correctAnswer: 3,
+    explanation: '81 (9²), 64 (8²), and 49 (7²) are perfect squares. 50 is not.',
     estimatedTime: 30
   },
   {
-    id: 'math_beginner_3',
-    type: PUZZLE_TYPES.MATH,
-    difficulty: DIFFICULTY.BEGINNER,
-    question: 'How many minutes are in 2 hours?',
-    content: '2 hours = ? minutes',
-    options: ['100', '120', '140', '60'],
-    correctAnswer: 1,
-    explanation: '1 hour = 60 minutes, so 2 hours = 120 minutes.',
+    id: 'odd_intermediate_3',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which word is the odd one?',
+    content: 'See, Hear, Smell, Think',
+    options: ['See', 'Hear', 'Smell', 'Think'],
+    correctAnswer: 3,
+    explanation: 'See, Hear, and Smell are physical senses. Think is a cognitive process.',
+    estimatedTime: 30
+  },
+  {
+    id: 'odd_intermediate_4',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Identify the intruder:',
+    content: 'Venus, Mars, Jupiter, Sun',
+    options: ['Venus', 'Mars', 'Jupiter', 'Sun'],
+    correctAnswer: 3,
+    explanation: 'Venus, Mars, and Jupiter are planets. The Sun is a star.',
+    estimatedTime: 30
+  },
+  {
+    id: 'odd_intermediate_5',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Select the different concept:',
+    content: 'Length, Weight, Time, Kilometer',
+    options: ['Length', 'Weight', 'Time', 'Kilometer'],
+    correctAnswer: 3,
+    explanation: 'Length, Weight, and Time are physical quantities (dimensions). Kilometer is a unit of measurement.',
+    estimatedTime: 30
+  },
+  {
+    id: 'odd_intermediate_6',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which word doesn\'t fit?',
+    content: 'Guitar, Violin, Cello, Trumpet',
+    options: ['Guitar', 'Violin', 'Cello', 'Trumpet'],
+    correctAnswer: 3,
+    explanation: 'Guitar, Violin, and Cello are string instruments. Trumpet is a brass instrument.',
+    estimatedTime: 30
+  },
+  {
+    id: 'odd_intermediate_7',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Find the odd geometric shape:',
+    content: 'Cube, Sphere, Pyramid, Square',
+    options: ['Cube', 'Sphere', 'Pyramid', 'Square'],
+    correctAnswer: 3,
+    explanation: 'Cube, Sphere, and Pyramid are 3D shapes. Square is a 2D shape.',
+    estimatedTime: 30
+  },
+  {
+    id: 'odd_intermediate_8',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which material is different?',
+    content: 'Gold, Silver, Iron, Wood',
+    options: ['Gold', 'Silver', 'Iron', 'Wood'],
+    correctAnswer: 3,
+    explanation: 'Gold, Silver, and Iron are metals. Wood is an organic material.',
+    estimatedTime: 30
+  },
+  {
+    id: 'odd_intermediate_9',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Identify the odd one:',
+    content: 'Shark, Whale, Dolphin, Porpoise',
+    options: ['Shark', 'Whale', 'Dolphin', 'Porpoise'],
+    correctAnswer: 0,
+    explanation: 'Whale, Dolphin, and Porpoise are mammals. Shark is a fish.',
+    estimatedTime: 35
+  },
+  {
+    id: 'odd_intermediate_10',
+    type: PUZZLE_TYPES.ODD_ONE_OUT,
+    difficulty: DIFFICULTY.INTERMEDIATE,
+    question: 'Which does not belong?',
+    content: 'Google, Microsoft, Apple, Wikipedia',
+    options: ['Google', 'Microsoft', 'Apple', 'Wikipedia'],
+    correctAnswer: 3,
+    explanation: 'Google, Microsoft, and Apple are for-profit tech corporations. Wikipedia is a non-profit organization.',
     estimatedTime: 30
   },
 
-  // ============================================
-  // LOGIC - BEGINNER (ADDED TO FIX EMPTY CATEGORY ISSUE)
-  // ============================================
-  {
-    id: 'logic_beginner_1',
-    type: PUZZLE_TYPES.LOGIC,
-    difficulty: DIFFICULTY.BEGINNER,
-    question: 'Which one is different?',
-    content: 'Dog, Cat, Parrot, Table',
-    options: ['Dog', 'Cat', 'Parrot', 'Table'],
-    correctAnswer: 3,
-    explanation: 'Dog, Cat, and Parrot are animals. Table is furniture.',
-    estimatedTime: 30
-  },
-  {
-    id: 'logic_beginner_2',
-    type: PUZZLE_TYPES.LOGIC,
-    difficulty: DIFFICULTY.BEGINNER,
-    question: 'If all roses are flowers, and this is a rose, then:',
-    content: 'All roses are flowers. This is a rose.',
-    options: ['This is not a flower', 'This is a flower', 'Cannot tell', 'This is a tree'],
-    correctAnswer: 1,
-    explanation: 'If all roses are flowers, and this is a rose, then this must be a flower.',
-    estimatedTime: 30
-  },
-  {
-    id: 'logic_beginner_3',
-    type: PUZZLE_TYPES.LOGIC,
-    difficulty: DIFFICULTY.BEGINNER,
-    question: 'Ravi is older than Amit. Amit is older than Priya. Who is youngest?',
-    content: 'Ravi > Amit > Priya',
-    options: ['Ravi', 'Amit', 'Priya', 'All same age'],
-    correctAnswer: 2,
-    explanation: 'Priya is younger than both Amit and Ravi, so she is the youngest.',
-    estimatedTime: 30
-  },
+
 
   // ============================================
   // PATTERN COMPLETION - BEGINNER
