@@ -1,6 +1,6 @@
 // ============================================
 // MindSpark - Puzzle Database
-// Copyright (c) 2026 Saransh. All Rights Reserved.
+// Copyright (c) 2026 Enso Studio. All Rights Reserved.
 // Unauthorized copying or distribution is prohibited.
 // ============================================
 
