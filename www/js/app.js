@@ -1,5 +1,6 @@
 // ============================================
 // MindSpark - Main Application Controller
+// Copyright (c) 2026 Saransh. All Rights Reserved.
 // ============================================
 
 const App = {
