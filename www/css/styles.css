@@ -379,6 +379,90 @@ body {
   background: hsla(0, 0%, 100%, 0.05);
 }
 
+.hint-button {
+  background: hsla(243, 75%, 59%, 0.1);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-display);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: all var(--transition-base);
+}
+
+.hint-button:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.hint-cost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  margin-left: var(--space-xs);
+  font-size: 0.8em;
+}
+
+.share-button {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-display);
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  transition: all var(--transition-base);
+  margin-bottom: var(--space-lg);
+}
+
+.share-button:hover {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px hsla(189, 94%, 43%, 0.4);
+}
+
+.settings-button {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 40px;
+  height: 40px;
+  background: var(--color-bg-secondary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid hsla(0, 0%, 100%, 0.1);
+  transition: all var(--transition-base);
+  /* Ensure it doesn't overlap on notch devices */
+  top: max(var(--space-md), env(safe-area-inset-top));
+}
+
+.settings-button:hover {
+  transform: rotate(90deg);
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-text-muted);
+}
+
 /* ============================================
    COMPONENTS - Option Cards
    ============================================ */
