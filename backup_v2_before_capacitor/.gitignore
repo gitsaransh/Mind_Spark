@@ -1,0 +1,25 @@
+# Documentation files (keep only essential ones)
+*.md
+!README.md
+
+# Python files
+*.py
+*.pyc
+__pycache__/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+test_helper.js
+
+# Logs
+*.log
