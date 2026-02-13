@@ -4,7 +4,8 @@
   "description": "**An engaging analytical thinking puzzle game with streak-based progression**",
   "main": "test_helper.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d www"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,9 @@
     "@capacitor/android": "^8.0.2",
     "@capacitor/cli": "^8.0.2",
     "@capacitor/core": "^8.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "gh-pages": "^6.3.0"
   }
 }

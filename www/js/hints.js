@@ -280,9 +280,15 @@ const HintSystem = {
             // Show ad loading state
             this.showAdLoadingState();
 
-            // Simulate ad watch (in production, integrate with AdMob or Google AdSense)
-            // For now, we'll use a simulated ad experience
-            this.simulateAdWatch().then(() => {
+            // Trigger ad watch flow (Calls AdSense/AdMob via AdsManager)
+            this.watchAd().then((success) => {
+                if (!success) {
+                    resolve({
+                        success: false,
+                        error: 'Ad failed to complete'
+                    });
+                    return;
+                }
                 // Award streak points
                 this.addStreakPoints(this.AD_REWARD);
 
@@ -305,15 +311,57 @@ const HintSystem = {
         });
     },
 
-    // Simulate ad watch (replace with real ad SDK in production)
+    // Watch ad to earn streak points (Integrated with AdsManager)
+    watchAd() {
+        return new Promise(async (resolve) => {
+            // In production, this uses AdsManager (AdMob/AdSense)
+            if (typeof AdsManager !== 'undefined') {
+                try {
+                    const result = await AdsManager.showRewardedAd();
+
+                    // Handle new response format from AdsManager
+                    if (result && result.success) {
+                        console.log('✅ Ad watched successfully, granting reward');
+                        resolve(true);
+                    } else {
+                        // Ad failed or user closed early
+                        console.warn('⚠️ Ad not completed:', result?.message || result?.error);
+
+                        // Show error message to user if available
+                        if (result?.message) {
+                            this.showAdErrorMessage(result.message);
+                        }
+
+                        resolve(false);
+                    }
+                } catch (error) {
+                    console.error('❌ Error showing ad:', error);
+                    this.showAdErrorMessage('Unable to load ad. Please try again later.');
+                    resolve(false);
+                }
+            } else {
+                // Fallback if AdsManager is missing
+                console.warn('AdsManager not available, using simulation');
+                this.simulateAdWatch().then(() => resolve(true));
+            }
+        });
+    },
+
+    // Show ad error message to user
+    showAdErrorMessage(message) {
+        if (typeof App !== 'undefined' && App.showNotification) {
+            App.showNotification('Ad Unavailable', message, 'warning');
+        } else {
+            // Fallback alert
+            alert(message);
+        }
+    },
+
+
+    // Simulate ad watch (Fallback / Web behavior)
     simulateAdWatch() {
         return new Promise((resolve) => {
-            // In production, this would be:
-            // - Google AdMob for mobile apps
-            // - Google AdSense for web
-            // - Other ad networks
-
-            // For demo, show a countdown
+            // Show a countdown dialog simulating an ad
             let countdown = 5;
             const adDialog = this.createAdDialog(countdown);
 
@@ -324,7 +372,7 @@ const HintSystem = {
                 if (countdown <= 0) {
                     clearInterval(interval);
                     adDialog.remove();
-                    resolve();
+                    resolve(true);
                 }
             }, 1000);
         });

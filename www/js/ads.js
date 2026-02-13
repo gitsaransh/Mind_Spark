@@ -11,9 +11,9 @@ const AdsManager = {
         // App ID (User to provide from AdMob dashboard)
         appId: 'ca-app-pub-4564028467824607~7976884590',
         // Ad Unit IDs
-        androidAdUnitId: 'ca-app-pub-4564028467824607/7568916404', // Replace with real ID
-        iosAdUnitId: 'ca-app-pub-XXXXXXXXXXXXXXXX/AAAAAAAAAA',     // Optional
-        webAdUnitId: 'ca-pub-4564028467824607',                    // AdSense Publisher ID
+        androidAdUnitId: 'ca-app-pub-4564028467824607/7568916404',
+        iosAdUnitId: 'ca-app-pub-XXXXXXXXXXXXXXXX/AAAAAAAAAA',
+        webAdUnitId: 'ca-pub-4564028467824607',
 
         testMode: true,  // Set to false when deploying for real revenue
         testDeviceIds: [], // Add test device IDs here
@@ -22,34 +22,35 @@ const AdsManager = {
     state: {
         isInitialized: false,
         isAdLoaded: false,
-        isLoading: false
+        isLoading: false,
+        pendingRewardResolve: null, // Store promise resolve function
+        pendingRewardReject: null   // Store promise reject function
     },
 
     // Initialize AdMob (Call on App Start)
     async init() {
         if (this.state.isInitialized) return;
 
-
+        console.log('🎬 AdsManager: Initializing...');
 
         // Check if running on Native Platform (Android/iOS)
         if (this.isNativePlatform()) {
             try {
-                // Ensure AdMob global exists (if not using modules)
-                // In standard Capacitor script usage, it might be window.AdMob or similar
-                // But usually we use the plugin. 
-                // We'll assume the plugin is available globally or needs to be accessed carefully.
-                // NOTE: Without a bundler (Webpack/Vite), `import` won't work in plain JS.
-                // We'll trust the user has a build process or uses the global Capacitor.Plugins.AdMob
-
                 const AdMob = window.Capacitor?.Plugins?.AdMob;
 
                 if (AdMob) {
+                    // Initialize AdMob
                     await AdMob.initialize({
                         requestTrackingAuthorization: true,
                         testingDevices: this.config.testDeviceIds,
                         initializeForTesting: this.config.testMode,
                     });
+
+                    // Set up event listeners ONCE during initialization
+                    this.setupAdMobEventListeners(AdMob);
+
                     this.state.isInitialized = true;
+                    console.log('✅ AdsManager: AdMob initialized successfully');
                 } else {
                     console.warn('⚠️ AdsManager: AdMob plugin not found. Is it installed?');
                 }
@@ -62,14 +63,100 @@ const AdsManager = {
         }
     },
 
+    // Setup AdMob Event Listeners (called once during init)
+    setupAdMobEventListeners(AdMob) {
+        console.log('🎧 AdsManager: Setting up event listeners...');
+
+        // Event: Ad Loaded Successfully
+        AdMob.addListener('onRewardedAdLoaded', () => {
+            console.log('✅ AdMob Event: Rewarded ad loaded');
+            this.state.isAdLoaded = true;
+            this.state.isLoading = false;
+        });
+
+        // Event: Ad Failed to Load
+        AdMob.addListener('onRewardedAdFailedToLoad', (error) => {
+            console.error('❌ AdMob Event: Failed to load ad', error);
+            this.state.isAdLoaded = false;
+            this.state.isLoading = false;
+
+            // Reject the pending promise if exists
+            if (this.state.pendingRewardReject) {
+                this.state.pendingRewardReject({
+                    success: false,
+                    error: 'Ad failed to load',
+                    message: 'Ad not available. Try again later.'
+                });
+                this.state.pendingRewardReject = null;
+                this.state.pendingRewardResolve = null;
+            }
+        });
+
+        // Event: Ad Shown (Opened)
+        AdMob.addListener('onRewardedAdShowed', () => {
+            console.log('👁️ AdMob Event: Rewarded ad shown');
+        });
+
+        // Event: User Earned Reward (CRITICAL - This is when we grant the hint)
+        AdMob.addListener('onRewardedAdEarned', (reward) => {
+            console.log('🎁 AdMob Event: User earned reward!', reward);
+
+            // Resolve the pending promise with success
+            if (this.state.pendingRewardResolve) {
+                this.state.pendingRewardResolve({
+                    success: true,
+                    reward: reward
+                });
+                this.state.pendingRewardResolve = null;
+                this.state.pendingRewardReject = null;
+            }
+        });
+
+        // Event: Ad Closed/Dismissed
+        AdMob.addListener('onRewardedAdDismissed', () => {
+            console.log('🚪 AdMob Event: Rewarded ad dismissed');
+            this.state.isAdLoaded = false;
+
+            // If promise is still pending (user closed ad without watching)
+            if (this.state.pendingRewardResolve) {
+                console.warn('⚠️ User closed ad without completing it');
+                this.state.pendingRewardResolve({
+                    success: false,
+                    error: 'Ad closed early',
+                    message: 'You need to watch the full ad to earn the reward.'
+                });
+                this.state.pendingRewardResolve = null;
+                this.state.pendingRewardReject = null;
+            }
+        });
+
+        // Event: Ad Failed to Show
+        AdMob.addListener('onRewardedAdFailedToShow', (error) => {
+            console.error('❌ AdMob Event: Failed to show ad', error);
+
+            if (this.state.pendingRewardReject) {
+                this.state.pendingRewardReject({
+                    success: false,
+                    error: 'Ad failed to show',
+                    message: 'Unable to show ad. Please try again.'
+                });
+                this.state.pendingRewardReject = null;
+                this.state.pendingRewardResolve = null;
+            }
+        });
+
+        console.log('✅ AdsManager: Event listeners registered');
+    },
+
     // Check if running on Capacitor Native
     isNativePlatform() {
         return window.Capacitor && window.Capacitor.isNativePlatform();
     },
 
-    // Initialize Web As (AdSense)
+    // Initialize Web Ads (AdSense)
     initWebAds() {
         if (!this.config.webAdUnitId.includes('pub-')) {
+            console.warn('⚠️ AdsManager: Invalid web ad unit ID');
             return;
         }
 
@@ -79,11 +166,12 @@ const AdsManager = {
         script.crossOrigin = 'anonymous';
         document.head.appendChild(script);
         this.state.isInitialized = true;
+        console.log('✅ AdsManager: AdSense initialized');
     },
 
-    // Show Rewarded Video Ad
+    // Show Rewarded Video Ad (Main Entry Point)
     async showRewardedAd() {
-
+        console.log('🎬 AdsManager: showRewardedAd() called');
 
         // 1. Native AdMob
         if (this.isNativePlatform()) {
@@ -94,65 +182,63 @@ const AdsManager = {
         return this.showWebRewardedAd();
     },
 
-    // Native AdMob Logic
+    // Native AdMob Logic with Proper Event Handling
     async showNativeRewardedAd() {
         return new Promise(async (resolve, reject) => {
             const AdMob = window.Capacitor?.Plugins?.AdMob;
+
             if (!AdMob) {
-                console.error('AdMob plugin missing');
-                resolve(false);
+                console.error('❌ AdMob plugin missing');
+                // Fallback to mock ad
+                const mockResult = await this.showMockAd('AdMob Not Available - Mock Fallback');
+                resolve(mockResult);
                 return;
             }
 
             try {
                 this.state.isLoading = true;
+                console.log('📡 Loading rewarded ad...');
+
+                // Store the promise resolve/reject for event handlers
+                this.state.pendingRewardResolve = resolve;
+                this.state.pendingRewardReject = reject;
 
                 // Prepare Ad options
                 const options = {
                     adId: this.config.androidAdUnitId,
                     isTesting: this.config.testMode
-                    // npa: true (if GDPR requires non-personalized)
                 };
 
-                // Listeners must be set before prepare
-                // We'll use a one-time listener approach or manage global listeners
-                // For simplicity here, we add listeners and remove them after? 
-                // Capacitor plugin usually handles single instance well.
-
-                // Note: Real implementation often caches ads ahead of time.
-                // We will load-and-show for simplicity in this step.
-
+                // Prepare the ad (this will trigger onRewardedAdLoaded or onRewardedAdFailedToLoad)
                 await AdMob.prepareRewardedAd(options);
 
-                // Show the ad
+                // Wait a moment for the ad to load
+                await new Promise(r => setTimeout(r, 500));
+
+                if (!this.state.isAdLoaded) {
+                    throw new Error('Ad failed to load within timeout');
+                }
+
+                // Show the ad (this will trigger onRewardedAdShowed)
+                console.log('📺 Showing rewarded ad...');
                 await AdMob.showRewardedAd();
 
-                // We need to listen to the 'onRewarded' event to resolve true
-                // Since this function is async and we want to await the result, 
-                // we depend on the listeners.
-
-                // This is tricky without a persistent event handler setup.
-                // The correct pattern is usually:
-                // 1. Add listeners at init
-                // 2. maintain 'pendingRewardResolve' variable
-
-                // For this quick integration, valid result assumes 'user watched'.
-                // Ideally, we'd hook into the event. 
-                // Let's assume the Promise from showRewardedAd resolves when ad closes?
-                // No, showRewardedAd resolves after *showing*. The reward comes later.
-
-                // Simple Fallback: Resolve true immediately for prototype, 
-                // OR wire up a temporary listener (better).
-
-                resolve(true); // Optimistic success for this prototype step
+                // The promise will be resolved by event listeners:
+                // - onRewardedAdEarned (success = true)
+                // - onRewardedAdDismissed (success = false if closed early)
+                // - onRewardedAdFailedToShow (error)
 
             } catch (error) {
-                console.error('AdMob Show Error:', error);
-                // Fallback to mock if loading fails
-                await this.showMockAd('Native Ad Failed - Mock Fallback');
-                resolve(true);
-            } finally {
+                console.error('❌ AdMob Show Error:', error);
                 this.state.isLoading = false;
+
+                // Clear pending promises
+                this.state.pendingRewardResolve = null;
+                this.state.pendingRewardReject = null;
+
+                // Fallback to mock ad
+                const mockResult = await this.showMockAd('Native Ad Failed - Mock Fallback');
+                resolve(mockResult);
             }
         });
     },

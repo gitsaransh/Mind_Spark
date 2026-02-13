@@ -372,12 +372,12 @@ const App = {
     },
 
     // Start daily challenge
-    startDailyChallenge() {
+    async startDailyChallenge() {
         if (!GameEngine.isDailyChallengeAvailable()) {
             return;
         }
 
-        const puzzle = GameEngine.startPuzzle(true);
+        const puzzle = await GameEngine.startPuzzle(true);
         if (puzzle) {
             this.loadPuzzle(puzzle);
             this.showScreen('gameplay-screen');
@@ -385,8 +385,8 @@ const App = {
     },
 
     // Start a regular puzzle
-    startPuzzle() {
-        const puzzle = GameEngine.startPuzzle(false);
+    async startPuzzle() {
+        const puzzle = await GameEngine.startPuzzle(false);
         if (puzzle) {
             this.loadPuzzle(puzzle);
             this.showScreen('gameplay-screen');
@@ -411,7 +411,15 @@ const App = {
 
         // Update question
         document.getElementById('puzzle-question-text').textContent = puzzle.question;
-        document.getElementById('puzzle-content-text').textContent = puzzle.content;
+
+        // Only show content if it's different from the question
+        const contentElement = document.getElementById('puzzle-content-text');
+        if (puzzle.content && puzzle.content !== puzzle.question) {
+            contentElement.textContent = puzzle.content;
+            contentElement.style.display = 'block';
+        } else {
+            contentElement.style.display = 'none';
+        }
 
         // Load options
         const optionsContainer = document.getElementById('answer-options');

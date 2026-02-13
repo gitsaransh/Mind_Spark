@@ -71,30 +71,52 @@ const GameEngine = {
     },
 
     // Start a new puzzle
-    startPuzzle(isDailyChallenge = false) {
+    async startPuzzle(isDailyChallenge = false) {
         this.state.isDailyChallenge = isDailyChallenge;
 
         let puzzle;
 
         if (isDailyChallenge) {
-            puzzle = getDailyChallengePuzzle();
+            puzzle = await getDailyChallengePuzzle();
             this.state.selectedMode = 'timed'; // Daily challenge is always timed
             this.state.selectedDifficulty = puzzle.difficulty;
         } else {
-            // Get random puzzle excluding already played in this session
-            const excludeIds = this.state.sessionPuzzles;
+            // v2.2: Improved Puzzle Selection (Avoid Repetition)
+            // 1. Get all puzzles solved in history
+            const progress = ProgressManager.getProgress();
+            const solvedIds = progress.solvedPuzzles || [];
+
+            // 2. Combine with current session puzzles
+            // (Use Set to ensure unique IDs)
+            const excludeSet = new Set([...solvedIds, ...this.state.sessionPuzzles]);
+            const excludeIds = Array.from(excludeSet);
+
             // v2.1: Support Category Filter
             const category = this.state.selectedCategory;
-            puzzle = getRandomPuzzle(category, this.state.selectedDifficulty, excludeIds);
+            const difficulty = this.state.selectedDifficulty;
 
-            // If all puzzles played, reset session puzzles
+            // 3. Try to get a NEW puzzle (unsolved)
+            puzzle = await getRandomPuzzle(category, difficulty, excludeIds);
+
+            // 4. Fallback Logic:
             if (!puzzle) {
-                this.state.sessionPuzzles = [];
-                puzzle = getRandomPuzzle(category, this.state.selectedDifficulty, []);
+                // Scenario A: User solved ALL puzzles in history, but some are available this session?
+                // Logic: Try excluding ONLY session puzzles (recycle old history)
+                puzzle = await getRandomPuzzle(category, difficulty, this.state.sessionPuzzles);
+
+                if (!puzzle) {
+                    // Scenario B: User solved ALL puzzles in history AND all available puzzles in this session!
+                    // Logic: We must recycle immediately. Clear session history for this specific filter to allow repeats.
+                    // Ideally we'd only clear the relevant IDs, but clearing all session history is a safe brute-force.
+                    // Better approach: Pick *ANY* random puzzle of this category/difficulty, ignoring exclusions.
+                    puzzle = await getRandomPuzzle(category, difficulty, []);
+                }
             }
         }
 
         if (!puzzle) {
+            // Edge Case: Category is completely empty in database
+            console.warn('No puzzles found in DB for selection');
             return null;
         }
 
