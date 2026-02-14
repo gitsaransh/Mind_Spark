@@ -1,7 +1,7 @@
 // ============================================
 // MindSpark - Beginner Puzzles
 // Auto-generated from puzzles.js split
-// Total: 75 puzzles
+// Total: 85 puzzles
 // ============================================
 
 // ============================================
@@ -925,15 +925,129 @@ const BEGINNER_PUZZLES = [
     correctAnswer: 0,
     explanation: 'Numbers decrease by 10 but repeat once: 50, 50, 40, 40, next is 30.',
     estimatedTime: 30
+  },
+
+  // LOGIC
+  {
+    id: 'logic_beginner_1',
+    type: PUZZLE_TYPES.LOGIC,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Simple Riddle',
+    content: 'What has to be broken before you can use it?',
+    options: ['A glass', 'An egg', 'A chair', 'A pencil'],
+    correctAnswer: 1,
+    explanation: 'An egg must be cracked (broken) to be cooked or used in baking.',
+    estimatedTime: 30
+  },
+  {
+    id: 'logic_beginner_2',
+    type: PUZZLE_TYPES.LOGIC,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'What am I?',
+    content: 'I have keys but no locks. I have a space but no room. You can enter but never go inside.',
+    options: ['A house', 'A car', 'A keyboard', 'A map'],
+    correctAnswer: 2,
+    explanation: 'A computer keyboard has keys, a space bar, and an Enter key.',
+    estimatedTime: 30
+  },
+  {
+    id: 'logic_beginner_3',
+    type: PUZZLE_TYPES.LOGIC,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Think carefully',
+    content: 'What month of the year has 28 days?',
+    options: ['February', 'December', 'June', 'All of them'],
+    correctAnswer: 3,
+    explanation: 'Every month has at least 28 days.',
+    estimatedTime: 30
+  },
+  {
+    id: 'logic_beginner_4',
+    type: PUZZLE_TYPES.LOGIC,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Riddle Me This',
+    content: 'I’m tall when I’m young, and I’m short when I’m old. What am I?',
+    options: ['A tree', 'A person', 'A candle', 'A building'],
+    correctAnswer: 2,
+    explanation: 'A candle burns down and gets shorter as it is used ("ages").',
+    estimatedTime: 30
+  },
+  {
+    id: 'logic_beginner_5',
+    type: PUZZLE_TYPES.LOGIC,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Object Logic',
+    content: 'What is full of holes but still holds water?',
+    options: ['A bucket', 'A sponge', 'A net', 'A cup'],
+    correctAnswer: 1,
+    explanation: 'A sponge is porous (full of holes) but absorbs and holds water.',
+    estimatedTime: 30
+  },
+
+  // MATH
+  {
+    id: 'math_beginner_1',
+    type: PUZZLE_TYPES.MATH,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Simple Math',
+    content: 'What is 5 + 5 + 5 - 5?',
+    options: ['15', '20', '10', '5'],
+    correctAnswer: 2,
+    explanation: '5 + 5 + 5 = 15. Then 15 - 5 = 10.',
+    estimatedTime: 30
+  },
+  {
+    id: 'math_beginner_2',
+    type: PUZZLE_TYPES.MATH,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Geometry Basics',
+    content: 'How many sides does a square have?',
+    options: ['3', '4', '5', '6'],
+    correctAnswer: 1,
+    explanation: 'A square has 4 equal sides.',
+    estimatedTime: 30
+  },
+  {
+    id: 'math_beginner_3',
+    type: PUZZLE_TYPES.MATH,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Counting Trick',
+    content: 'If you have 3 apples and you take away 2, how many do you have?',
+    options: ['1', '2', '3', '0'],
+    correctAnswer: 1,
+    explanation: 'You took 2 apples, so you have 2 apples.',
+    estimatedTime: 30
+  },
+  {
+    id: 'math_beginner_4',
+    type: PUZZLE_TYPES.MATH,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Number Comparison',
+    content: 'Which number is the biggest?',
+    options: ['99', '100', '9', '10'],
+    correctAnswer: 1,
+    explanation: '100 is the largest number in the list.',
+    estimatedTime: 30
+  },
+  {
+    id: 'math_beginner_5',
+    type: PUZZLE_TYPES.MATH,
+    difficulty: DIFFICULTY.BEGINNER,
+    question: 'Arithmetic',
+    content: 'What is half of 10?',
+    options: ['2', '4', '5', '6'],
+    correctAnswer: 2,
+    explanation: '10 divided by 2 is 5.',
+    estimatedTime: 30
   }
 ];
 
 // Export for module systems (if needed)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = BEGINNER_PUZZLES;
+  module.exports = BEGINNER_PUZZLES;
 }
 
 // Make globally accessible
 if (typeof window !== 'undefined') {
-    window.BEGINNER_PUZZLES = BEGINNER_PUZZLES;
+  window.BEGINNER_PUZZLES = BEGINNER_PUZZLES;
 }
