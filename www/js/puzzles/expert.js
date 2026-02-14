@@ -875,8 +875,6 @@ const EXPERT_PUZZLES = [
     content: '10, 11, 12, 13, 14, 15, 16, ?',
     options: ['20', '17', '21', '100'],
     correctAnswer: 1,
-    explanation: 'Base-n sequence riddle. But could just be simple +1. Trick question? Actually, in base 7: 10(7), 11(8), 12(9)... no. Let\'s stick to simple +1 trick if "17" is answer.',
-    correctAnswer: 1,
     explanation: 'Just counting numbers. Sometimes the simplest answer is right.',
     estimatedTime: 90
   },
@@ -1343,12 +1341,12 @@ const EXPERT_PUZZLES = [
 
 // Export for module systems (if needed)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = EXPERT_PUZZLES;
+  module.exports = EXPERT_PUZZLES;
 }
 
 // Make globally accessible
 if (typeof window !== 'undefined') {
-    if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     window.EXPERT_PUZZLES = EXPERT_PUZZLES;
-}
+  }
 }

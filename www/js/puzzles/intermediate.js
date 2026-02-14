@@ -1563,28 +1563,17 @@ const INTERMEDIATE_PUZZLES = [
     explanation: "The hands overlap every 12/11 hours (approximately 65.45 minutes). In 12 hours: 12 ÷ (12/11) = 11 overlaps.",
     hint: "They don't overlap at exactly every hour",
     estimatedTime: 60
-  },
-
-  {
-    id: 'pattern_beginner_15',
-    type: PUZZLE_TYPES.PATTERN,
-    difficulty: DIFFICULTY.INTERMEDIATE,
-    question: 'Complete the pattern:',
-    content: '11, 22, 33, 44, ?',
-    options: ['50', '55', '60', '65'],
-    correctAnswer: 1,
-    explanation: 'Multiples of 11: 11×1, 11×2, 11×3, 11×4, so next is 11×5=55.',
-    estimatedTime: 30
-  }];
+  }
+];
 
 // Export for module systems (if needed)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = INTERMEDIATE_PUZZLES;
+  module.exports = INTERMEDIATE_PUZZLES;
 }
 
 // Make globally accessible
 if (typeof window !== 'undefined') {
-    if (typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     window.INTERMEDIATE_PUZZLES = INTERMEDIATE_PUZZLES;
-}
+  }
 }
