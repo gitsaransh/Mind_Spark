@@ -410,11 +410,15 @@ const App = {
         document.getElementById('puzzle-difficulty-badge').textContent = GameEngine.getDifficultyLabel(puzzle.difficulty);
 
         // Update question
-        document.getElementById('puzzle-question-text').textContent = puzzle.question;
+        const questionText = puzzle.question ? puzzle.question.trim() : '';
+        document.getElementById('puzzle-question-text').textContent = questionText;
 
-        // Only show content if it's different from the question
+        // Only show content if it's different from the question (ignoring whitespace and case)
         const contentElement = document.getElementById('puzzle-content-text');
-        if (puzzle.content && puzzle.content !== puzzle.question) {
+        const contentText = puzzle.content ? puzzle.content.trim() : '';
+
+        // Show content ONLY if it exists AND is significantly different from the question
+        if (contentText && contentText.toLowerCase() !== questionText.toLowerCase()) {
             contentElement.textContent = puzzle.content;
             contentElement.style.display = 'block';
         } else {
